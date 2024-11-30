@@ -9,24 +9,10 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 
 
 @Entity(name = "User")
-@Table(
-        name = "user",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "user_login_unique", columnNames ="login")
-        }
-)
 public class User {
 
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
@@ -36,9 +22,9 @@ public class User {
 
     @Column(
             name = "login",
-            nullable = false,
+            nullable = false, // означае что бул жер не нулл
             unique = true,
-            columnDefinition = "TEXT"
+            columnDefinition = "TEXT" // тип данных
     )
     private String login;
 
