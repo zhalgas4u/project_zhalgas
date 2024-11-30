@@ -16,10 +16,6 @@ public class User {
     private Long id;
 
 
-
-
-
-
     @Column(
             name = "login",
             nullable = false, // означае что бул жер не нулл
