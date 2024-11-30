@@ -1,21 +1,76 @@
 package com.example.MyFirstProjectWithMentor.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CollectionIdMutability;
+
+import java.util.List;
+
+import static jakarta.persistence.GenerationType.SEQUENCE;
 
 
-@Entity
+@Entity(name = "User")
+@Table(
+        name = "user",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "user_login_unique", columnNames ="login")
+        }
+)
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "user_sequence"
+    )
     private Long id;
 
+
+
+
+
+
+    @Column(
+            name = "login",
+            nullable = false,
+            unique = true,
+            columnDefinition = "TEXT"
+    )
     private String login;
+
+
+
+
+
+    @Column(
+            name = "password",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String password;
 
+
+
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Voice> voice; // Подписи пользователя
+
+
+
+
+
+    public void setVoice(List<Voice> voice) {
+        this.voice = voice;
+    }
+
+    public List<Voice> getVoice() {
+        return voice;
+    }
 
     public Long getId() {
         return id;
