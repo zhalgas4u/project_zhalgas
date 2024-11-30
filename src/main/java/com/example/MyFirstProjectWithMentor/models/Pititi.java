@@ -1,12 +1,11 @@
 package com.example.MyFirstProjectWithMentor.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
-//testing new brach
-@Entity
+import java.util.List;
+
+@Entity(name = "Pititi")
 public class Pititi {
 
     @Id
@@ -16,8 +15,19 @@ public class Pititi {
     private String name;
     private String description;
     private LocalDate creationDate;
-    private int votes;
+    //private int votes;
 
+    @OneToMany(mappedBy = "petition", cascade = CascadeType.ALL)
+    private List<Voice> voice; // Подписи, связанные с петицией
+
+
+    public void setVoice(List<Voice> voice) {
+        this.voice = voice;
+    }
+
+    public List<Voice> getVoice() {
+        return voice;
+    }
 
     public Long getId() {
         return id;
@@ -51,12 +61,12 @@ public class Pititi {
         this.creationDate = creationDate;
     }
 
-    public int getVotes() {
+   /* public int getVotes() {
         return votes;
     }
 
     public void setVotes(int votes) {
         this.votes = votes;
-    }
+    }*/
 }
 

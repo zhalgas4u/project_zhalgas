@@ -1,20 +1,21 @@
 package com.example.MyFirstProjectWithMentor.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "Voice")
 public class Voice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id") //  ключ юзерлерге
     private User user;
 
-
+    @ManyToOne
+    @JoinColumn(name = "petition_id") //  ключ питити
     private Pititi petition;
 
 
