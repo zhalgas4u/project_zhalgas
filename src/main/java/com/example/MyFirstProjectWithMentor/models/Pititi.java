@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity(name = "Pititi")
+@Entity(name = "new_Pititi")
 public class Pititi {
 
     @Id

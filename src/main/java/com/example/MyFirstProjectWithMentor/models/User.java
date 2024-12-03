@@ -8,13 +8,21 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 
-@Entity(name = "User")
+@Entity(name = "new_User")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(
+            name = "name",
+            nullable = false, // означае что бул жер не нулл
+            unique = false,
+            columnDefinition = "TEXT" // тип данных
+    )
+    private String name;
 
     @Column(
             name = "login",
@@ -25,9 +33,6 @@ public class User {
     private String login;
 
 
-
-
-
     @Column(
             name = "password",
             nullable = false,
@@ -35,12 +40,14 @@ public class User {
     )
     private String password;
 
-
-
-
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Voice> voice; // Подписи пользователя
+
+
+
+
+
+
 
 
 
@@ -76,6 +83,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 
