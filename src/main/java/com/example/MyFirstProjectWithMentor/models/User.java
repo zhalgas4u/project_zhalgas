@@ -8,42 +8,29 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 
-@Entity(name = "User")
-@Table(
-        name = "user",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "user_login_unique", columnNames ="login")
-        }
-)
+@Entity(name = "new_User")
 public class User {
 
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
-
-
-
+    @Column(
+            name = "name",
+            nullable = false, // означае что бул жер не нулл
+            unique = false,
+            columnDefinition = "TEXT" // тип данных
+    )
+    private String name;
 
     @Column(
             name = "login",
-            nullable = false,
+            nullable = false, // означае что бул жер не нулл
             unique = true,
-            columnDefinition = "TEXT"
+            columnDefinition = "TEXT" // тип данных
     )
     private String login;
-
-
-
 
 
     @Column(
@@ -53,12 +40,14 @@ public class User {
     )
     private String password;
 
-
-
-
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Voice> voice; // Подписи пользователя
+
+
+
+
+
+
 
 
 
@@ -94,6 +83,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 
