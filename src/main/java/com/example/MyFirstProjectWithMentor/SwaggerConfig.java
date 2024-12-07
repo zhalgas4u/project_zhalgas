@@ -16,4 +16,5 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("API для управления пользователями"));
     }
+    //http://localhost:8080/swagger-ui.html
 }
