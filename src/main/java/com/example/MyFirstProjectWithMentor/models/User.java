@@ -22,7 +22,7 @@ public class User {
             unique = false,
             columnDefinition = "TEXT" // тип данных
     )
-    private String name;
+    private String name;// - add new pereson
 
     @Column(
             name = "login",

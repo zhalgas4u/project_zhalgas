@@ -2,6 +2,7 @@ package com.example.MyFirstProjectWithMentor.controller;
 
 import com.example.MyFirstProjectWithMentor.models.User;
 import com.example.MyFirstProjectWithMentor.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class UserController {
 
     //@PostMapping: Обрабатывает POST-запросы (создание)
     //@RequestBody: Преобразует JSON-запрос в объект Java.
+    @Operation(summary = "Создать нового пользователя")
     @PostMapping("/creat")
     public User createPititi(@RequestBody User user) {
         return userService.createUser(user);
@@ -27,6 +29,7 @@ public class UserController {
 
     //@GetMapping: Для получения данных.
     //@PathVariable: Извлекает переменные из URL.
+    @Operation(summary = "Получить список всех пользователей")
     @GetMapping("/get")
     public List<User> getAllUser() {
         return userService.getAllUser();
@@ -34,12 +37,14 @@ public class UserController {
 
 
     //@PutMapping: Для обновления.
+    @Operation(summary = "Обновить пользователя по ID")
     @PutMapping("/update/{id}")
     public User updateUser(@PathVariable Long id ,@RequestBody User user) {
         return userService.updateUser(id, user);
 
     }
 
+    @Operation(summary = "Удалить пользователя по ID")
     @DeleteMapping("/delete/{id}")
     //@DeleteMapping: Для удаления
     public void deleteUser(@PathVariable Long id) {
